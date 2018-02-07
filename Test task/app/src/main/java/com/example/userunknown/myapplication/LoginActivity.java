@@ -120,7 +120,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(VKResponse response) {
                         VKApiUser user = ((VKList<VKApiUser>)response.parsedModel).get(0);
                         int vk_id = user.getId();
-                        Toast.makeText(LoginActivity.this,user.first_name + " " + user.last_name, Toast.LENGTH_SHORT).show();
+
                         DataBaseClass db = new DataBaseClass(LoginActivity.this);
                         String pass = password.getText().toString();
                         String login = name.getText().toString();

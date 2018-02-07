@@ -67,7 +67,7 @@ public class PostingActivity extends AppCompatActivity {
                 Bitmap bitmap = null;
                 if(picture.getTag() != null) {
                     bitmap = ImageOperation.decodeSampledBitmapFromPath(picture.getTag().toString(), 400, 400);
-                    //Log.i("size", bitmap.getWidth() + " " + bitmap.getHeight());
+
                     VKRequest request = VKApi.uploadWallPhotoRequest(new VKUploadImage(bitmap,
                             VKImageParameters.jpgImage(0.9f)), getMyId(), 0);
                     request.executeWithListener(new VKRequest.VKRequestListener() {
@@ -90,7 +90,7 @@ public class PostingActivity extends AppCompatActivity {
                                 db.addHistory("Upload picture and status", date, prefs.getInt("id_user", -1));
                             }
 
-                            Toast.makeText(PostingActivity.this,"message posted",Toast.LENGTH_SHORT);
+                            Toast.makeText(PostingActivity.this,"message posted",Toast.LENGTH_SHORT).show();
 
                             picture.setImageBitmap(null);
                             picture.setTag(null);
@@ -109,7 +109,7 @@ public class PostingActivity extends AppCompatActivity {
                     DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                     String date = df.format(Calendar.getInstance().getTime());
                     db.addHistory("Upload status",date,prefs.getInt("id_user",-1));
-                    Toast.makeText(PostingActivity.this,"message posted",Toast.LENGTH_SHORT);
+                    Toast.makeText(PostingActivity.this,"message posted",Toast.LENGTH_SHORT).show();
 
                     picture.setImageBitmap(null);
                     picture.setTag(null);

@@ -57,14 +57,21 @@ public class ContactsActivity extends AppCompatActivity {
         int i=0;
         for (Contact c : contacts) {
             final TableRow row = new TableRow(this);
-            row.setOnClickListener(new View.OnClickListener() {
+
+            row.setLayoutParams(tableParams);
+
+            LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
+            View childLayout = inflater.inflate(R.layout.listview_contacts_item,
+                    (ViewGroup) findViewById(R.id.contact_item), false);
+            childLayout.setLayoutParams(rowParams);
+            childLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
                 }
             });
 
-            row.setOnTouchListener(new OnSwipeTouchListener(this) {
+            childLayout.setOnTouchListener(new OnSwipeTouchListener(this) {
 
                 public void onSwipeLeft() {
                     index = (int)row.getTag();
@@ -74,7 +81,7 @@ public class ContactsActivity extends AppCompatActivity {
 
                         intent.setData(Uri.parse("tel:" + contacts.get(index) ));
                         startActivity(intent);
-                        Toast.makeText(ContactsActivity.this, "left", Toast.LENGTH_SHORT).show();
+
 
                     } else {
                         ActivityCompat.requestPermissions(ContactsActivity.this,
@@ -85,12 +92,6 @@ public class ContactsActivity extends AppCompatActivity {
                 }
 
             });
-            row.setLayoutParams(tableParams);
-
-            LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
-            View childLayout = inflater.inflate(R.layout.listview_contacts_item,
-                    (ViewGroup) findViewById(R.id.contact_item), false);
-            childLayout.setLayoutParams(rowParams);
 
             TextView name = (TextView) childLayout.findViewById(R.id.textView_name);
             name.setText(c.name);
